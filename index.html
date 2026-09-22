@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#173f3a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DOG MIND">
+<title>DOG MIND 2.0｜個体学習型 犬の観察ナビ</title>
+<style>
+:root{--ink:#17312e;--muted:#667a76;--paper:#f7f2e8;--card:#fffdf8;--green:#1f6b5f;--green2:#3c8b7b;--lime:#b7d97b;--orange:#e9974e;--rose:#d76a68;--sky:#7bb6c8;--line:rgba(23,49,46,.12);--shadow:0 18px 50px rgba(23,49,46,.12)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:radial-gradient(circle at 10% 0%,rgba(183,217,123,.35),transparent 34%),radial-gradient(circle at 100% 14%,rgba(123,182,200,.28),transparent 30%),linear-gradient(180deg,#fbf8f0,#f4efe3);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;min-height:100vh;padding-bottom:94px}button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:760px;margin:auto}.topbar{position:sticky;top:0;z-index:20;padding:14px 18px 12px;background:rgba(251,248,240,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.brand{display:flex;gap:10px;align-items:center}.mark{width:44px;height:44px;border-radius:16px;background:linear-gradient(145deg,var(--green),#123b36);display:grid;place-items:center;font-size:23px}.brand h1{font-size:17px;margin:0;letter-spacing:.08em}.brand small{font-size:9px;color:var(--muted)}main{padding:18px}.screen{display:none}.screen.active{display:block;animation:fade .25s}@keyframes fade{from{opacity:.3;transform:translateY(4px)}to{opacity:1}}.hero{background:linear-gradient(145deg,#173f3a,#286e62);color:#fff;border-radius:30px;padding:24px;box-shadow:var(--shadow);position:relative;overflow:hidden}.hero:after{content:"🐕";position:absolute;font-size:150px;right:-10px;bottom:-38px;opacity:.13}.eyebrow{font-size:10px;letter-spacing:.16em;font-weight:800;opacity:.72}.hero h2{font-size:28px;line-height:1.3;margin:10px 0}.hero p{font-size:12px;line-height:1.8;max-width:72%;opacity:.88}.primary,.secondary{width:100%;border-radius:18px;padding:14px 16px;font-weight:800}.primary{border:0;background:linear-gradient(135deg,var(--green),var(--green2));color:white;box-shadow:0 10px 24px rgba(31,107,95,.22)}.secondary{border:1px solid var(--line);background:#fff;color:var(--green);margin-top:9px}.hero .primary{width:auto;background:#f5e7b0;color:#24483f;margin-top:10px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:14px 0}.card,.panel{background:var(--card);border:1px solid rgba(23,49,46,.08);border-radius:23px;box-shadow:0 9px 26px rgba(23,49,46,.06)}.card{padding:16px;text-align:left;border:0;min-height:126px;color:var(--ink)}.card .ico{font-size:25px}.card h3{font-size:14px;margin:10px 0 5px}.card p,.sub,.notice{font-size:10px;line-height:1.65;color:var(--muted)}.panel{padding:17px;margin:12px 0}.panel h3{font-size:15px;margin:0 0 10px}.section-head h2{font-size:24px;margin:0 0 5px}.section-head p{font-size:11px;color:var(--muted);line-height:1.6}.back{border:0;background:none;color:var(--green);font-weight:800;padding:4px 0 12px}.field{margin:11px 0}.field label{display:block;font-size:10px;font-weight:800;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);background:#fff;border-radius:14px;padding:12px}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.choice{border:1px solid var(--line);background:#fff;border-radius:16px;padding:11px 5px;text-align:center;font-size:10px;min-height:65px}.choice span{display:block;font-size:21px;margin-bottom:4px}.choice.selected,.chip.selected{background:var(--green);color:#fff;border-color:var(--green)}.chips{display:flex;flex-wrap:wrap;gap:7px}.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 11px;font-size:10px;color:var(--ink)}.group{margin:17px 0}.group h4{font-size:11px;margin:0 0 8px;color:#48605d}.intensity{margin:10px 0;padding:10px;border:1px solid var(--line);border-radius:16px;background:#fff}.intensity-head{display:flex;justify-content:space-between;font-size:10px;font-weight:800}.intensity input{width:100%;accent-color:var(--green)}.result{background:linear-gradient(145deg,#163d38,#235f56);color:white;border-radius:27px;padding:20px}.result h2{font-size:25px;margin:7px 0}.badge{display:inline-block;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.12);font-size:9px}.barrow{margin:12px 0}.barlabel{display:flex;justify-content:space-between;font-size:10px}.bar{height:8px;background:rgba(255,255,255,.13);border-radius:999px;overflow:hidden;margin-top:5px}.bar i{display:block;height:100%;background:linear-gradient(90deg,#b7d97b,#f2df98)}.explain{margin-top:13px;padding:13px;background:rgba(255,255,255,.09);border-radius:15px;font-size:10px;line-height:1.7}.feedback{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}.feedback button{border:1px solid var(--line);background:#fff;border-radius:14px;padding:11px;font-size:10px}.alert{background:#fff0ec;border:1px solid rgba(215,106,104,.3);color:#8c3737;border-radius:17px;padding:13px;font-size:10px;line-height:1.65;margin-top:10px}.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:#fff;border:1px solid var(--line);border-radius:17px;padding:12px;text-align:center}.stat strong{font-size:21px;color:var(--green);display:block}.stat small{font-size:9px;color:var(--muted)}.history{padding:12px;border:1px solid var(--line);background:#fff;border-radius:16px;margin:8px 0}.history strong{font-size:11px}.history p{font-size:9px;color:var(--muted);margin:5px 0 0}.science-item{padding:12px 0;border-bottom:1px solid var(--line)}.science-item:last-child{border:0}.science-item b{font-size:11px}.science-item p{font-size:9px;color:var(--muted);line-height:1.6;margin:4px 0}.bottomnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(760px,100%);display:grid;grid-template-columns:repeat(5,1fr);padding:7px 10px 10px;background:rgba(255,253,248,.93);backdrop-filter:blur(20px);border-top:1px solid var(--line);z-index:30}.nav{border:0;background:none;color:#758581;font-size:8px;padding:7px 2px;border-radius:13px}.nav b{display:block;font-size:18px}.nav.active{background:#e6f0e8;color:var(--green);font-weight:800}.hidden{display:none!important}.tiny{font-size:9px;color:var(--muted);line-height:1.6}.range-row{display:grid;grid-template-columns:1fr 42px;gap:8px;align-items:center}.range-row input{width:100%;accent-color:var(--green)}.range-row output{font-weight:900;color:var(--green);text-align:right}.notice{padding:12px 14px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.65);margin:12px 0}@media(max-width:420px){.hero h2{font-size:24px}.hero p{max-width:76%}.grid{gap:9px}.three{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar"><div class="brand"><div class="mark">🐾</div><div><h1>DOG MIND 2.0</h1><small>SCIENCE × BASELINE × OWNER LEARNING</small></div></div><div style="font-size:10px;color:var(--green);font-weight:800">個体学習型</div></header>
+<main>
+<section class="screen active" id="home">
+<div class="hero"><div class="eyebrow">YOUR DOG, NOT THE AVERAGE DOG</div><h2><span id="heroName">愛犬</span>を、<br>使うほど深く知る。</h2><p>研究ベースの行動指標と「その子の普段」、飼い主の訂正を重ねて観察モデルを育てます。</p><button class="primary" data-go="observe">1分観察を始める</button></div>
+<div class="notice"><b>重要：</b>これは診断機器ではありません。行動・環境・身体サインから可能性と変化を整理する観察支援ツールです。急な体調変化は獣医師を優先してください。</div>
+<div class="grid">
+<button class="card" data-go="observe"><div class="ico">🧠</div><h3>精密観察</h3><p>情動・覚醒・身体・社会行動を状況別に解析。</p></button>
+<button class="card" data-go="baseline"><div class="ico">📊</div><h3>この子の平常値</h3><p>過去記録から個体ベースラインと変化を表示。</p></button>
+<button class="card" data-go="learn"><div class="ico">🎓</div><h3>飼い主が教える</h3><p>判定のズレを訂正し、この子専用の重みを育てる。</p></button>
+<button class="card" data-go="science"><div class="ico">🔬</div><h3>研究モデル</h3><p>採用している評価思想と限界を確認。</p></button>
+</div>
+<div class="panel"><h3>愛犬プロフィール</h3><div class="field"><label>名前</label><input id="dogName" placeholder="例：モカ"></div><div class="three"><div class="field"><label>年齢</label><input id="dogAge" type="number" min="0" max="30"></div><div class="field"><label>体重 kg</label><input id="dogWeight" type="number" step=".1"></div><div class="field"><label>性別</label><select id="dogSex"><option value="">未設定</option><option>オス</option><option>メス</option></select></div></div><div class="field"><label>犬種</label><input id="dogBreed" placeholder="柴犬・ミックス等"></div><div class="field"><label>この子の特徴・苦手なもの</label><textarea id="dogNotes" placeholder="例：雷が苦手。散歩後はパンティングしやすい。"></textarea></div><button class="secondary" id="saveDog">保存</button></div>
+</section>
+
+<section class="screen" id="observe"><button class="back" data-go="home">← ホームへ</button><div class="section-head"><h2>精密観察</h2><p>最初は少ない質問から。選択内容に応じて必要な観察だけ追加します。</p></div>
+<div class="panel"><h3>1. 状況</h3><div class="three" id="contexts"></div></div>
+<div class="panel"><h3>2. いま見えるサイン</h3><div class="sub">複数選択できます。意味を先に決めず「見えた事実」を選びます。</div><div id="signalGroups"></div></div>
+<div class="panel"><h3>3. 強さを追加評価</h3><div class="sub">選んだ重要サインだけ0〜5で強度を付けます。</div><div id="intensities"></div></div>
+<div class="panel"><h3>4. 身体・健康</h3><div class="chips" id="health"></div></div>
+<button class="primary" id="analyze">DOG MIND解析</button><div id="resultBox" class="hidden" style="margin-top:13px"></div>
+</section>
+
+<section class="screen" id="baseline"><button class="back" data-go="home">← ホームへ</button><div class="section-head"><h2>この子の平常値</h2><p>一般論ではなく、過去の同じ犬との比較を中心に見ます。</p></div><div id="baselineBox"></div></section>
+
+<section class="screen" id="learn"><button class="back" data-go="home">← ホームへ</button><div class="section-head"><h2>飼い主が教える</h2><p>DOG MINDの推定が違った時に訂正すると、そのサインと状況の個体重みを少しずつ調整します。</p></div><div class="panel"><h3>個体学習の状態</h3><div id="learningStats"></div><div class="notice">補正は一般的な科学モデルを消すのではなく、±40%の範囲で個体差として加えます。少数回の訂正で極端に変わらない設計です。</div><button class="secondary" id="resetLearning">個体学習だけリセット</button></div></section>
+
+<section class="screen" id="history"><div class="section-head"><h2>観察履歴</h2><p>単発の点数より「いつもからどう変わったか」を重視します。</p></div><div id="historyBox"></div></section>
+
+<section class="screen" id="science"><button class="back" data-go="home">← ホームへ</button><div class="section-head"><h2>研究モデル</h2><p>DOG MINDは既存尺度そのものを複製せず、研究で支持された観察思想・領域を独自UIへ統合します。</p></div>
+<div class="panel">
+<div class="science-item"><b>🧭 C-BARQ系の行動領域</b><p>対人・対犬反応、分離関連、興奮性、接触感受性、追跡傾向などを「長期傾向」の設計参考にします。</p></div>
+<div class="science-item"><b>🌧️ Lincoln Canine Anxiety Scale系</b><p>震え、隠れる、縮こまる、落ち着かなさ等を有無だけでなく強度として扱う考え方を採用。</p></div>
+<div class="science-item"><b>🌿 Five Domains</b><p>栄養・環境・健康・行動的相互作用から精神状態を考え、選択・主体性も重視します。</p></div>
+<div class="science-item"><b>👁️ DogFACS系</b><p>顔の筋活動を客観的に記述する研究を参考にします。ただし顔だけで感情を断定せず、全身・文脈の補助情報として扱います。</p></div>
+<div class="science-item"><b>🐕 Individual Baseline</b><p>同じ犬の反復観察から状況別の平常値を作り、一般モデルとの差より「その子の変化」を重視します。</p></div>
+</div><div class="alert"><b>医療上の限界</b><br>呼吸困難、意識低下、けいれん、急な腹部膨張、強い痛み、立てない、毒物誤食などはアプリ判定を待たず動物病院へ。</div>
+</section>
+</main>
+<nav class="bottomnav"><button class="nav active" data-go="home"><b>⌂</b>ホーム</button><button class="nav" data-go="observe"><b>🐾</b>観察</button><button class="nav" data-go="baseline"><b>📊</b>平常値</button><button class="nav" data-go="learn"><b>🧠</b>学習</button><button class="nav" data-go="history"><b>≡</b>履歴</button></nav>
+</div>
+<script>
+(()=>{'use strict';
+const KEY='dogmind_v2';
+const STATES={content:['安心・満足','😌'],playful:['遊び・喜び','🎾'],curious:['探索・興味','🔎'],anxious:['不安','🌧️'],fear:['恐怖','😨'],arousal:['高覚醒・興奮','⚡'],frustrated:['フラストレーション','😤'],discomfort:['身体的不快','🩺'],fatigue:['疲労・休息欲求','💤'],social:['接触・社会的欲求','🤝']};
+const defaults={dog:{},history:[],learning:{weights:{},feedback:0},version:2};
+let data=load(),ctx='home',selected=new Set(),health=new Set(),intensity={};
+function load(){try{return Object.assign({},defaults,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch{return JSON.parse(JSON.stringify(defaults))}}
+function save(){localStorage.setItem(KEY,JSON.stringify(data))}
+function esc(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+function toast(t){let d=document.createElement('div');d.textContent=t;d.style='position:fixed;z-index:99;left:50%;bottom:100px;transform:translateX(-50%);background:#173f3a;color:#fff;padding:10px 15px;border-radius:999px;font-size:10px';document.body.appendChild(d);setTimeout(()=>d.remove(),1700)}
+function go(id){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active',x.dataset.go===id));if(id==='baseline')renderBaseline();if(id==='history')renderHistory();if(id==='learn')renderLearning();scrollTo({top:0,behavior:'smooth'})}
+document.addEventListener('click',e=>{let b=e.target.closest('[data-go]');if(b)go(b.dataset.go)});
+
+const contexts=[['home','🏠','家・休憩'],['walk','🦮','散歩'],['play','🎾','遊び'],['meal','🍚','食事'],['stranger','👤','知らない人'],['dog','🐕','他の犬'],['alone','🚪','留守番'],['vet','🏥','病院・ケア'],['noise','⚡','大きな音'],['car','🚗','移動'],['sleep','🌙','睡眠前後'],['newplace','🧭','初めての場所']];
+const CW={home:{content:2},walk:{curious:2},play:{playful:3,arousal:1},meal:{content:1,arousal:1},stranger:{anxious:1,curious:1},dog:{social:1,arousal:1},alone:{anxious:2},vet:{anxious:2,discomfort:1},noise:{fear:3,anxious:2},car:{anxious:1},sleep:{fatigue:2,content:1},newplace:{curious:2,anxious:1}};
+const groups={
+'目・顔':['softEyes|目元が柔らかい|content:3','blink|ゆっくり瞬き|content:2','whaleEye|白目が見える|anxious:2,fear:2','stare|凝視する|arousal:2,curious:1','pupil|瞳孔が大きい|arousal:2,fear:1','lipLick|鼻・唇をなめる|anxious:2,discomfort:1','yawn|状況に合わないあくび|anxious:2,fatigue:1','mouthSoft|口元が柔らかい|content:2'],
+'耳・尾':['earsNeutral|耳が自然|content:2','earsBack|耳を後ろへ|anxious:2,fear:1','earsForward|耳を前へ|curious:2,arousal:1','tailLoose|尾がゆったり|content:2,playful:1','tailHigh|尾が高く硬い|arousal:3','tailTucked|尾を巻き込む|fear:4,anxious:2','tailFast|尾を速く振る|arousal:2,playful:1'],
+'姿勢・運動':['loose|全身が柔らかい|content:3,playful:1','playBow|プレイバウ|playful:4','bouncy|弾む動き|playful:3,arousal:1','sniff|匂いを探索|curious:3,content:1','freeze|急に固まる|fear:3,anxious:2','crouch|身を低く縮める|fear:4','pace|行ったり来たり|anxious:2,arousal:2','tremble|震える|fear:4,anxious:2','hide|隠れる・逃げる|fear:4,anxious:2','lean|自分から体を預ける|social:3,content:1','restless|体勢を何度も変える|discomfort:2,anxious:1','slowMove|動きが普段より遅い|fatigue:2,discomfort:2'],
+'声・選択':['quiet|静かに休む|content:3,fatigue:1','whine|鼻鳴き|anxious:2,social:1','bark|繰り返し吠える|arousal:3,frustrated:2','growl|低く唸る|arousal:2,anxious:2,discomfort:1','treat|好物を食べられる|content:2','refuse|好物も受け取らない|fear:2,discomfort:2','recovery|刺激後すぐ戻る|content:2','cling|飼い主から離れない|anxious:2,social:2','scratchDoor|出口・対象へ執着|frustrated:3,anxious:1','destroy|破壊行動|frustrated:2,anxious:2,arousal:1']
+};
+const parsed={};Object.entries(groups).forEach(([g,a])=>parsed[g]=a.map(s=>{let [id,t,w]=s.split('|'),o={};w.split(',').forEach(z=>{let[k,v]=z.split(':');o[k]=+v});return[id,t,o]}));
+const healthItems=[['none','特になし'],['limp','歩き方の変化'],['vomit','繰り返す嘔吐・下痢'],['breath','呼吸が苦しそう'],['collapse','立てない・意識異常'],['bloat','腹部が急に膨らむ'],['pain','強い痛み'],['appetite','食欲低下'],['water','飲水の急変'],['toilet','排泄の急変']];
+function renderContexts(){contextsEl.innerHTML=contexts.map(x=>`<button class="choice ${ctx===x[0]?'selected':''}" data-ctx="${x[0]}"><span>${x[1]}</span>${x[2]}</button>`).join('')}
+function renderSignals(){signalGroups.innerHTML=Object.entries(parsed).map(([g,a])=>`<div class="group"><h4>${g}</h4><div class="chips">${a.map(x=>`<button class="chip ${selected.has(x[0])?'selected':''}" data-sig="${x[0]}">${x[1]}</button>`).join('')}</div></div>`).join('')}
+function renderIntensity(){let ids=[...selected].filter(id=>['freeze','tremble','hide','pace','pant','whaleEye','tailTucked','bark','growl','restless','refuse','cling'].includes(id));intensities.innerHTML=ids.length?ids.map(id=>{let s=findSig(id);let v=intensity[id]??3;return`<div class="intensity"><div class="intensity-head"><span>${s[1]}</span><b id="iv_${id}">${v}/5</b></div><input data-int="${id}" type="range" min="0" max="5" value="${v}"></div>`}).join(''):'<div class="tiny">強度追加が必要なサインを選ぶと表示されます。</div>'}
+function renderHealth(){healthEl.innerHTML=healthItems.map(x=>`<button class="chip ${health.has(x[0])?'selected':''}" data-health="${x[0]}">${x[1]}</button>`).join('')}
+function findSig(id){for(let a of Object.values(parsed)){let f=a.find(x=>x[0]===id);if(f)return f}}
+const contextsEl=document.getElementById('contexts'),signalGroups=document.getElementById('signalGroups'),intensities=document.getElementById('intensities'),healthEl=document.getElementById('health');
+contextsEl.onclick=e=>{let b=e.target.closest('[data-ctx]');if(b){ctx=b.dataset.ctx;renderContexts()}};
+signalGroups.onclick=e=>{let b=e.target.closest('[data-sig]');if(!b)return;selected.has(b.dataset.sig)?selected.delete(b.dataset.sig):selected.add(b.dataset.sig);renderSignals();renderIntensity()};
+intensities.oninput=e=>{let b=e.target.closest('[data-int]');if(b){intensity[b.dataset.int]=+b.value;document.getElementById('iv_'+b.dataset.int).textContent=b.value+'/5'}};
+healthEl.onclick=e=>{let b=e.target.closest('[data-health]');if(!b)return;let id=b.dataset.health;if(id==='none')health=new Set(['none']);else{health.delete('none');health.has(id)?health.delete(id):health.add(id)}renderHealth()};
+
+function individualFactor(sig,state){let key=sig+'>'+state;return data.learning?.weights?.[key]||1}
+function softmax(scores){let ks=Object.keys(scores),vals=ks.map(k=>Math.exp(scores[k]/3)),sum=vals.reduce((a,b)=>a+b,0);return Object.fromEntries(ks.map((k,i)=>[k,Math.round(vals[i]/sum*100)]))}
+function baselineFor(context){let arr=data.history.filter(x=>x.type==='observe'&&x.context===context).slice(0,30);if(arr.length<3)return null;let avg={};Object.keys(STATES).forEach(k=>avg[k]=Math.round(arr.reduce((s,x)=>s+(x.probs?.[k]||0),0)/arr.length));return{n:arr.length,avg}}
+function analyze(){
+ if(selected.size<2){toast('サインを2つ以上選んでください');return}
+ let scores={};Object.keys(STATES).forEach(k=>scores[k]=1);Object.entries(CW[ctx]||{}).forEach(([k,v])=>scores[k]+=v);
+ let reasons=[];
+ selected.forEach(id=>{let s=findSig(id);if(!s)return;let mult=1+((intensity[id]??3)-3)*.15;Object.entries(s[2]).forEach(([k,v])=>{let add=v*mult*individualFactor(id,k);scores[k]+=add;reasons.push([add,s[1],k])})});
+ if(health.size&&!health.has('none')){scores.discomfort+=3+health.size*1.5;if(health.has('appetite')||health.has('water')||health.has('toilet'))scores.discomfort+=1}
+ let probs=softmax(scores),sorted=Object.entries(probs).sort((a,b)=>b[1]-a[1]),top=sorted[0],base=baselineFor(ctx),deviation=null;
+ if(base){deviation=Math.round(Math.abs(top[1]-(base.avg[top[0]]||0)))}
+ let emergency=['breath','collapse','bloat'].some(x=>health.has(x));
+ let topReasons=reasons.filter(x=>x[2]===top[0]).sort((a,b)=>b[0]-a[0]).slice(0,4).map(x=>x[1]);
+ let conf=Math.min(92,42+selected.size*3+(top[1]-sorted[1][1])+Math.min((base?.n||0),10));
+ let entry={id:Date.now(),type:'observe',date:new Date().toISOString(),context:ctx,signals:[...selected],health:[...health],intensity:{...intensity},probs,top:top[0],confidence:conf,deviation,feedback:null};
+ data.history.unshift(entry);data.history=data.history.slice(0,200);save();
+ resultBox.classList.remove('hidden');
+ resultBox.innerHTML=`<div class="result"><div class="eyebrow">DOG MIND ANALYSIS</div><h2>${STATES[top[0]][1]} ${STATES[top[0]][0]}</h2><span class="badge">推定確からしさ ${conf}%</span>${base?` <span class="badge">同状況の過去 ${base.n}回と比較</span>`:''}<div>${sorted.slice(0,5).map(([k,v])=>`<div class="barrow"><div class="barlabel"><span>${STATES[k][1]} ${STATES[k][0]}</span><b>${v}%</b></div><div class="bar"><i style="width:${v}%"></i></div></div>`).join('')}</div><div class="explain"><b>今回の判断に影響した観察</b><br>${topReasons.length?topReasons.join('・'):'状況情報を中心に推定'}${base?`<br><br><b>この子の普段との比較</b><br>${deviation>=20?'普段との差が大きめです。':'大きな逸脱は見られません。'} 主状態の差 ${deviation}ポイント。`:''}</div></div>${emergency?'<div class="alert"><b>緊急性の高い身体サインがあります。</b><br>アプリの行動推定より動物病院への連絡を優先してください。</div>':''}<div class="panel"><h3>この判定は、この子に合っていますか？</h3><div class="feedback"><button data-fb="yes">👍 合ってる</button><button data-fb="maybe">△ 少し違う</button><button data-fb="no">✕ 違う</button></div><div id="correctBox" class="hidden"></div></div>`;
+ resultBox.querySelector('.feedback').onclick=e=>{let b=e.target.closest('[data-fb]');if(!b)return;feedback(entry.id,b.dataset.fb)};
+ resultBox.scrollIntoView({behavior:'smooth'});
+}
+document.getElementById('analyze').onclick=analyze;
+function feedback(id,kind){let entry=data.history.find(x=>x.id===id);if(!entry)return;if(kind==='yes'){entry.feedback='yes';data.learning.feedback++;save();toast('この子の特徴として学習しました');return}let c=document.getElementById('correctBox');c.classList.remove('hidden');c.innerHTML=`<div class="field"><label>実際は何に近かった？</label><select id="correctState">${Object.entries(STATES).map(([k,v])=>`<option value="${k}">${v[1]} ${v[0]}</option>`).join('')}</select></div><button class="secondary" id="applyCorrection">この子のモデルを補正</button>`;document.getElementById('applyCorrection').onclick=()=>{let correct=document.getElementById('correctState').value;entry.feedback=kind;entry.correct=correct;entry.signals.forEach(sig=>{let good=sig+'>'+correct,bad=sig+'>'+entry.top;data.learning.weights[good]=Math.min(1.4,(data.learning.weights[good]||1)+.05);if(correct!==entry.top)data.learning.weights[bad]=Math.max(.6,(data.learning.weights[bad]||1)-.04)});data.learning.feedback++;save();toast('個体モデルを補正しました');renderLearning()}}
+
+function renderBaseline(){let obs=data.history.filter(x=>x.type==='observe');if(!obs.length){baselineBox.innerHTML='<div class="panel tiny">まだ観察記録がありません。3回以上から状況別の平常値を表示します。</div>';return}let avg={};Object.keys(STATES).forEach(k=>avg[k]=Math.round(obs.reduce((s,x)=>s+(x.probs?.[k]||0),0)/obs.length));let sorted=Object.entries(avg).sort((a,b)=>b[1]-a[1]);let ctxs={};obs.forEach(x=>ctxs[x.context]=(ctxs[x.context]||0)+1);baselineBox.innerHTML=`<div class="panel"><h3>全観察 ${obs.length}回</h3><div class="statgrid"><div class="stat"><strong>${obs.length}</strong><small>観察回数</small></div><div class="stat"><strong>${data.learning.feedback||0}</strong><small>飼い主FB</small></div><div class="stat"><strong>${Object.keys(ctxs).length}</strong><small>観察状況</small></div></div></div><div class="panel"><h3>現在の平均プロファイル</h3>${sorted.slice(0,6).map(([k,v])=>`<div class="range-row" style="margin:10px 0"><span style="font-size:10px">${STATES[k][1]} ${STATES[k][0]}</span><output>${v}</output></div>`).join('')}<div class="notice">この平均は性格の優劣ではありません。記録が増えるほど「この子らしい通常範囲」を作る材料になります。</div></div>`}
+function renderLearning(){let w=Object.entries(data.learning.weights||{}).filter(x=>Math.abs(x[1]-1)>.001);learningStats.innerHTML=`<div class="statgrid"><div class="stat"><strong>${data.learning.feedback||0}</strong><small>フィードバック</small></div><div class="stat"><strong>${w.length}</strong><small>個体補正</small></div><div class="stat"><strong>${data.history.filter(x=>x.type==='observe').length}</strong><small>学習記録</small></div></div>${w.length?'<div style="margin-top:12px">'+w.slice(0,12).map(([k,v])=>`<div class="tiny">${esc(k)}：×${v.toFixed(2)}</div>`).join('')+'</div>':''}`}
+document.getElementById('resetLearning').onclick=()=>{if(confirm('飼い主による個体補正だけをリセットしますか？')){data.learning={weights:{},feedback:0};save();renderLearning()}};
+function renderHistory(){let a=data.history.filter(x=>x.type==='observe');historyBox.innerHTML=a.length?a.map(x=>`<div class="history"><strong>${STATES[x.top]?.[1]||'🐾'} ${esc(STATES[x.top]?.[0]||x.top)} ・ ${contexts.find(c=>c[0]===x.context)?.[2]||x.context}</strong><span style="float:right;font-size:8px;color:var(--muted)">${new Date(x.date).toLocaleString('ja-JP',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'})}</span><p>観察 ${x.signals.length}項目 / 確からしさ ${x.confidence}% ${x.correct?' / 飼い主訂正：'+STATES[x.correct][0]:''}</p></div>`).join(''):'<div class="panel tiny">まだ観察履歴がありません。</div>'}
+
+function syncDog(){let d=data.dog||{};dogName.value=d.name||'';dogAge.value=d.age||'';dogWeight.value=d.weight||'';dogSex.value=d.sex||'';dogBreed.value=d.breed||'';dogNotes.value=d.notes||'';heroName.textContent=d.name||'愛犬'}
+document.getElementById('saveDog').onclick=()=>{data.dog={name:dogName.value.trim(),age:dogAge.value,weight:dogWeight.value,sex:dogSex.value,breed:dogBreed.value.trim(),notes:dogNotes.value.trim()};save();syncDog();toast('プロフィールを保存しました')};
+renderContexts();renderSignals();renderIntensity();renderHealth();syncDog();renderLearning();
+})();
+</script>
+</body></html>
