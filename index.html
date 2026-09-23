@@ -41,7 +41,7 @@
     .hero:before{width:220px;height:220px;background:rgba(183,217,123,.16);right:-70px;top:-82px}.hero:after{width:160px;height:160px;background:rgba(123,182,200,.17);left:-58px;bottom:-75px}
     .hero-copy{position:relative;z-index:2;width:62%}.eyebrow{font-size:11px;letter-spacing:.18em;font-weight:800;opacity:.75}.hero h2{font-size:29px;line-height:1.28;margin:10px 0}.hero p{font-size:13px;line-height:1.8;opacity:.88;margin:0}
     .dog-art{position:absolute;right:8px;bottom:-3px;width:185px;height:190px;z-index:1;filter:drop-shadow(0 14px 20px rgba(0,0,0,.18))}
-    .hero-cta{position:relative;z-index:3;margin-top:18px;border:0;border-radius:17px;padding:13px 18px;background:#f5e7b0;color:#24483f;font-weight:800;box-shadow:0 8px 18px rgba(0,0,0,.12)}
+    .bgpick{position:absolute;right:14px;top:14px;z-index:6;border:1px solid rgba(255,255,255,.45);background:rgba(0,0,0,.25);color:#fff;border-radius:999px;padding:8px 11px;font-size:10px;font-weight:800;backdrop-filter:blur(8px)}.hero.has-custom-bg:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,61,54,.82),rgba(12,61,54,.30));z-index:0}.hero.has-custom-bg .hero-copy{position:relative;z-index:2}.hero.has-custom-bg .dog-art{display:none}.hero-cta{position:relative;z-index:3;margin-top:18px;border:0;border-radius:17px;padding:13px 18px;background:#f5e7b0;color:#24483f;font-weight:800;box-shadow:0 8px 18px rgba(0,0,0,.12)}
     .notice{margin:14px 0;padding:13px 15px;border-radius:18px;background:rgba(255,253,248,.72);border:1px solid var(--line);font-size:11px;line-height:1.65;color:var(--muted)}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.menu-card{border:0;text-align:left;background:var(--card);border-radius:23px;padding:17px;box-shadow:0 10px 30px rgba(23,49,46,.08);min-height:142px;color:var(--ink);position:relative;overflow:hidden}
     .menu-card .ico{width:42px;height:42px;border-radius:15px;display:grid;place-items:center;font-size:21px;margin-bottom:13px}.menu-card h3{font-size:15px;margin:0 0 6px}.menu-card p{font-size:11px;line-height:1.55;color:var(--muted);margin:0}.menu-card .arrow{position:absolute;right:14px;top:15px;color:rgba(23,49,46,.3)}
@@ -81,7 +81,7 @@
 
   <main>
     <section class="screen active" id="home">
-      <div class="hero">
+      <div class="hero" id="dogHero"><button class="bgpick" type="button" id="dogBgBtn">📷 背景を変更</button><input id="dogBgInput" type="file" accept="image/*" hidden>
         <div class="hero-copy"><div class="eyebrow">BEHAVIOUR × CONTEXT × WELFARE</div><h2><span id="heroName">愛犬</span>のサインを、<br>丁寧に読み解く。</h2><p>表情だけで決めつけず、体・行動・状況・暮らしを重ねて「今の状態」を推定します。</p><button class="hero-cta" data-go="now">今の気持ちを観察</button></div>
         <svg class="dog-art" viewBox="0 0 220 220" aria-hidden="true">
           <ellipse cx="112" cy="194" rx="80" ry="18" fill="rgba(0,0,0,.12)"/>
@@ -156,13 +156,18 @@
   </main>
 
   <nav class="bottomnav" aria-label="メインメニュー">
-    <button class="navbtn active" data-go="home"><b>⌂</b>ホーム</button><button class="navbtn" data-go="now"><b>🐾</b>今の状態</button><button class="navbtn" data-go="profile"><b>◎</b>個性</button><button class="navbtn" data-go="welfare"><b>♧</b>快適度</button><button class="navbtn" data-go="history"><b>≡</b>履歴</button><button class="navbtn" type="button" onclick="location.href='./index.html'"><b>▦</b>シリーズ</button>
+    <button class="navbtn active" data-go="home"><b>⌂</b>ホーム</button><button class="navbtn" data-go="now"><b>🐾</b>今の状態</button><button class="navbtn" data-go="profile"><b>◎</b>個性</button><button class="navbtn" data-go="welfare"><b>♧</b>快適度</button><button class="navbtn" data-go="history"><b>≡</b>履歴</button><button class="navbtn" type="button" onclick="location.href='https://maruko0525.github.io/mind-series/'"><b>▦</b>シリーズ</button>
   </nav>
 </div>
 <script>
 (() => {
   'use strict';
   const KEY='dogmind_v1';
+  const BGKEY='dogmind_custom_bg_v1';
+  function applyDogBg(src){const h=document.getElementById('dogHero');if(!h)return;if(src){h.style.backgroundImage=`url("${src}")`;h.style.backgroundSize='cover';h.style.backgroundPosition='center';h.classList.add('has-custom-bg')}else{h.style.backgroundImage='';h.classList.remove('has-custom-bg')}}
+  try{applyDogBg(localStorage.getItem(BGKEY)||'')}catch(e){}
+  document.getElementById('dogBgBtn').onclick=()=>document.getElementById('dogBgInput').click();
+  document.getElementById('dogBgInput').onchange=e=>{const f=e.target.files&&e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{localStorage.setItem(BGKEY,r.result);applyDogBg(r.result);toast('背景を変更しました')}catch(err){alert('画像が大きすぎます。少し小さい画像を選んでください。')}};r.readAsDataURL(f)};
   const defaultData={dog:{name:'',age:'',breed:''},history:[],profile:null,welfare:null};
   let data=load();
   let selectedContext='home', selectedSignals=new Set(), selectedHealth=new Set();
