@@ -69,6 +69,7 @@
     .hidden{display:none!important}
     @media(max-width:420px){.hero-copy{width:65%}.hero h2{font-size:25px}.dog-art{width:165px;right:-3px}.grid{gap:10px}.menu-card{padding:15px;min-height:136px}.context-grid{grid-template-columns:repeat(3,1fr)}.scale{gap:5px}.scale button{font-size:9px;padding:11px 2px}}
   </style>
+  <link rel="stylesheet" href="diary.css" />
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Mind Series">
@@ -104,6 +105,8 @@
         <button class="menu-card" data-go="profile"><span class="arrow">›</span><div class="ico" style="background:#eef0df">🧭</div><h3>行動プロフィール</h3><p>普段の傾向を32問で整理し、愛犬の個性を把握。</p></button>
         <button class="menu-card" data-go="welfare"><span class="arrow">›</span><div class="ico" style="background:#e6eff2">🌿</div><h3>暮らしの快適度</h3><p>Five Domainsに沿って生活全体を確認。</p></button>
         <button class="menu-card" data-go="guide"><span class="arrow">›</span><div class="ico" style="background:#fff0e3">👀</div><h3>サイン図鑑</h3><p>耳・目・口・尾・姿勢を単独で決めつけず読む。</p></button>
+        <button class="menu-card" data-go="diary"><span class="arrow">›</span><div class="ico" style="background:#f2e7da">📖</div><h3>愛犬日記</h3><p>写真と出来事を記録。カレンダーで振り返り、検索できます。</p></button>
+        <button class="menu-card" data-go="backup"><span class="arrow">›</span><div class="ico" style="background:#e6f0e8">💾</div><h3>データ保存・復元</h3><p>観察記録と日記をまとめてバックアップ。</p></button>
       </div>
       <div class="panel"><h3>愛犬の登録</h3><div class="sub">名前を入れると表示に反映します。データはこの端末内だけに保存されます。</div>
         <div class="field"><label>名前</label><input id="dogName" placeholder="例：モカ" maxlength="20" /></div>
@@ -141,6 +144,47 @@
       <div class="section-head"><h2>観察履歴</h2><p>変化を見ることが、単発の判定より大切です。</p></div><div id="historyList"></div><button class="secondary" id="clearHistory">履歴を削除</button>
     </section>
 
+    <section class="screen" id="diary">
+      <button class="back" data-go="home">← ホームへ</button>
+      <div class="section-head"><h2>📖 愛犬日記</h2><p>いつもの何気ない一日も、かけがえのない記録に。</p></div>
+      <div class="diary-tabs"><button type="button" class="active" id="diaryCalendarTab">カレンダー</button><button type="button" id="diarySearchTab">日記を検索</button></div>
+      <div id="diaryCalendarView">
+        <div class="diary-month"><button type="button" id="diaryPrev" aria-label="前の月">‹</button><strong id="diaryMonthLabel"></strong><button type="button" id="diaryNext" aria-label="次の月">›</button></div>
+        <div class="diary-weekdays"><span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span></div>
+        <div class="diary-calendar" id="diaryCalendarGrid"></div>
+        <p class="diary-hint">● 日記のある日　📷 写真のある日</p>
+        <div class="diary-day-head"><h3 id="diarySelectedLabel"></h3><button class="primary" type="button" id="diaryNew">＋ 日記を書く</button></div>
+        <div id="diaryDayList"></div>
+      </div>
+      <div id="diarySearchView" class="hidden">
+        <div class="field"><label for="diaryQuery">キーワード（本文・タイトル・タグ・場所）</label><input id="diaryQuery" placeholder="例：散歩、病院、食欲" /></div>
+        <div class="field"><label for="diaryTagFilter">タグ</label><input id="diaryTagFilter" placeholder="例：健康" /></div>
+        <div class="diary-two"><div class="field"><label for="diaryFrom">開始日</label><input type="date" id="diaryFrom" /></div><div class="field"><label for="diaryTo">終了日</label><input type="date" id="diaryTo" /></div></div>
+        <button class="secondary" id="diaryClearSearch" type="button">条件をクリア</button>
+        <div id="diarySearchList"></div>
+      </div>
+      <div id="diaryEditor" class="panel hidden">
+        <h3 id="diaryEditTitle">日記を書く</h3>
+        <div class="field"><label for="diaryDate">日付</label><input type="date" id="diaryDate" /></div>
+        <div class="field"><label for="diaryTitle">今日のひとこと</label><input id="diaryTitle" placeholder="例：家族で出かけた、何でもないいい日" /></div>
+        <div class="field"><label for="diaryBody">日記</label><textarea id="diaryBody" rows="6" placeholder="何があった？何を感じた？短くても大丈夫。"></textarea></div>
+        <div class="field"><label for="diaryTags">タグ（カンマ区切り）</label><input id="diaryTags" placeholder="散歩, 旅行, 健康" /></div>
+        <div class="field"><label for="diaryPlace">場所</label><input id="diaryPlace" placeholder="公園、動物病院など" /></div>
+        <button class="secondary" type="button" id="diaryGeo">⌖ 現在地を付ける</button><small id="diaryGeoText" class="diary-hint"></small>
+        <div class="field"><label for="diaryFiles">写真・ファイルを添付（複数可）</label><input id="diaryFiles" type="file" multiple accept="image/*,.pdf,.txt,.csv,.json,.doc,.docx" /></div>
+        <div class="diary-hint">写真は容量を軽くして保存します。その他のファイルは1件10MBまで。保存容量には端末の制限があります。</div>
+        <div id="diaryAttachments"></div>
+        <div class="diary-actions"><button class="primary" type="button" id="diarySave">この日を保存</button><button class="secondary" type="button" id="diaryCancel">入力を取りやめる</button></div>
+      </div>
+    </section>
+
+    <section class="screen" id="backup">
+      <button class="back" data-go="home">← ホームへ</button>
+      <div class="section-head"><h2>💾 データ保存・復元</h2><p>アップデートや機種変更に備えて、記録をまるごと保存できます。</p></div>
+      <div class="panel"><h3>バックアップを書き出す</h3><p class="sub">犬の登録情報・観察履歴・プロフィール・快適度・背景画像・日記・添付ファイルを1つのJSONにまとめます。</p><button class="primary" id="backupExport" type="button">📥 すべての記録を保存</button><p class="diary-hint">iPhoneでは保存したファイルを「ファイル」アプリなどに保管してください。バックアップは自動では外部保存されません。</p></div>
+      <div class="panel"><h3>バックアップから復元</h3><p class="sub">既存の観察履歴・日記をできるだけ残し、重複しない記録を追記します。犬の基本情報・プロフィールなどは、現在の値が空の場合にバックアップから補います。</p><div class="field"><label for="backupInput">バックアップJSONファイルを選ぶ</label><input type="file" id="backupInput" accept=".json,application/json"></div><button class="secondary" id="backupImport" type="button">📤 バックアップを読み込む</button><p class="diary-hint" id="backupStatus"></p></div>
+    </section>
+
     <section class="screen" id="guide">
       <button class="back" data-go="home">← ホームへ</button><div class="section-head"><h2>サイン図鑑</h2><p>同じ動きでも文脈で意味は変わります。全身と直前の出来事を一緒に見てください。</p></div>
       <div class="guide-list">
@@ -164,6 +208,7 @@
     <button class="navbtn active" data-go="home"><b>⌂</b>ホーム</button><button class="navbtn" data-go="now"><b>🐾</b>今の状態</button><button class="navbtn" data-go="profile"><b>◎</b>個性</button><button class="navbtn" data-go="welfare"><b>♧</b>快適度</button><button class="navbtn" data-go="history"><b>≡</b>履歴</button><button class="navbtn" type="button" onclick="location.href='https://maruko0525.github.io/mind-series/'"><b>▦</b>シリーズ</button>
   </nav>
 </div>
+<script src="diary.js" defer></script>
 <script>
 (() => {
   'use strict';
@@ -182,7 +227,7 @@
   function load(){try{return {...defaultData,...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch{return structuredClone(defaultData)}}
   function save(){localStorage.setItem(KEY,JSON.stringify(data))}
   function esc(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
-  function go(id){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('.navbtn').forEach(x=>x.classList.toggle('active',x.dataset.go===id));window.scrollTo({top:0,behavior:'smooth'});if(id==='history')renderHistory();}
+  function go(id){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('.navbtn').forEach(x=>x.classList.toggle('active',x.dataset.go===id));window.scrollTo({top:0,behavior:'smooth'});if(id==='history')renderHistory();if(id==='diary')window.DogDiary?.open();}
   document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)go(b.dataset.go)});
 
   function syncDog(){const n=data.dog?.name||'';document.getElementById('dogName').value=n;document.getElementById('dogAge').value=data.dog?.age||'';document.getElementById('dogBreed').value=data.dog?.breed||'';document.getElementById('heroName').textContent=n||'愛犬'}
@@ -290,6 +335,7 @@
 
   document.getElementById('soundBtn').onclick=async()=>{if(audioCtx){audioNodes.forEach(n=>{try{n.stop()}catch{}});audioCtx.close();audioCtx=null;audioNodes=[];document.getElementById('soundBtn').textContent='♪';return}audioCtx=new (window.AudioContext||window.webkitAudioContext)();await audioCtx.resume();const master=audioCtx.createGain();master.gain.value=.035;master.connect(audioCtx.destination);[174,261.6,349.2].forEach((f,i)=>{const o=audioCtx.createOscillator(),g=audioCtx.createGain(),lfo=audioCtx.createOscillator(),lg=audioCtx.createGain();o.type=i===0?'sine':'triangle';o.frequency.value=f;g.gain.value=i===0?.45:.18;lfo.frequency.value=.06+i*.025;lg.gain.value=3+i;lfo.connect(lg);lg.connect(o.frequency);o.connect(g);g.connect(master);o.start();lfo.start();audioNodes.push(o,lfo)});document.getElementById('soundBtn').textContent='×';};
 
+  window.DogMindBridge={getData:()=>structuredClone(data),setData:(d)=>{data=d;save();syncDog();renderHistory();},getBackground:()=>localStorage.getItem(BGKEY)||"",setBackground:(src)=>{if(src){localStorage.setItem(BGKEY,src);applyDogBg(src)}},toast};
   syncDog();renderContexts();renderSignals();renderHealth();renderQuestion();renderWelfare();renderHistory();
 })();
 </script>
